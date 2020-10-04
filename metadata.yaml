@@ -1,0 +1,16 @@
+---
+documentclass: report # 2019-05-10 
+papersize: a5
+geometry: left=1cm, right=1cm, top=1.3cm, bottom=2cm
+mainfont: Latin Modern Roman
+fontsize: 11pt
+monofont: Latin Modern Mono
+monofontoptions: Scale=0.97
+# mainfont: TeX Gyre Pagella
+top-level-division: chapter
+secnumdepth: 0
+pagecolor: fff8dc
+# pagecolor: faf0e6
+---
+
+
