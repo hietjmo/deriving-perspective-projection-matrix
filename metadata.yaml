@@ -9,7 +9,7 @@ monofontoptions: Scale=0.97
 # mainfont: TeX Gyre Pagella
 top-level-division: chapter
 secnumdepth: 0
-pagecolor: fff8dc
+# pagecolor: fff8dc
 # pagecolor: faf0e6
 ---
 
