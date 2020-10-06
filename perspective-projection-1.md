@@ -33,10 +33,10 @@ w \\
 \end{pmatrix}$$
 where
 $$\begin{aligned}
-x' = x m_{11} + y m_{21} + z m_{31} + w m_{41}\\
-y' = x m_{12} + y m_{22} + z m_{32} + w m_{42}\\
-z' = x m_{13} + y m_{23} + z m_{33} + w m_{43}\\
-w' = x m_{14} + y m_{24} + z m_{34} + w m_{44}\\
+x' = m_{11} x + m_{12} y + m_{13} z + m_{14} w \\
+y' = m_{21} x + m_{22} y + m_{23} z + m_{24} w \\
+z' = m_{31} x + m_{32} y + m_{33} z + m_{34} w \\
+w' = m_{41} x + m_{42} y + m_{43} z + m_{44} w \\
 \end{aligned}$$
 
 $\cdots$
