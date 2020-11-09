@@ -85,6 +85,7 @@ $$\mathbf {M}_\text{proj}' = \begin{pmatrix}
 \begin{center}
 \begin{tikzpicture} 
 \begin{scope}[line width=0.6pt]
+\fill[gray!5] (-2,1.5) -- (2,1.5) -- (2,-1.5) -- (-2,-1.5) -- cycle;
 \coordinate (y-ax) at (0,2.0);
 \coordinate (x-ax) at (2.5,0);
 \draw[-latex] (0,-1.9) -- (y-ax);
@@ -107,6 +108,242 @@ $$\mathbf {M}_\text{proj}' = \begin{pmatrix}
 \end{center}
 \end{figure}
 
+\usetikzlibrary {perspective}
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[3d view={-30}{10}]
+%\draw[-latex] (0,0,0) -- (1,0,0) node[pos=1.4] {$x$};
+%\draw[-latex] (0,0,0) -- (0,1,0) node[pos=1.25] {$y$};
+%\draw[-latex] (0,0,0) -- (0,0,1) node[pos=1.25] {$z$};
+\coordinate (camera) at (0,0,0);
+\coordinate (near-middle) at (4.5,0,0);
+\coordinate (far-middle) at (9,0,0);
+\coordinate (near-top-left) at (4.5,2,1.5);
+\coordinate (near-top-right) at (4.5,-2,1.5);
+\coordinate (near-bottom-right) at (4.5,-2,-1.5);
+\coordinate (near-bottom-left) at (4.5,2,-1.5);
+\coordinate (far-top-left) at (9,4,3);
+\coordinate (far-top-right) at (9,-4,3);
+\coordinate (far-bottom-right) at (9,-4,-3);
+\coordinate (far-bottom-left) at (9,4,-3);
+\fill[gray!5]  (near-top-left) -- (near-top-right) -- (near-bottom-right) -- (near-bottom-left) --cycle;
+\fill[gray!5]  (near-top-left) -- (near-top-right) -- (far-top-right) -- (far-top-left) --cycle;
+\fill[gray!5]  (near-bottom-right) -- (near-top-right) -- (far-top-right) -- (far-bottom-right) --cycle;
+\draw (far-top-left) -- (far-top-right) -- (far-bottom-right) -- (far-bottom-left) --cycle;
+\draw (near-top-left) -- (near-top-right) -- (near-bottom-right) -- (near-bottom-left) --cycle;
+\draw (near-top-left) -- (far-top-left);
+\draw (near-top-right) -- (far-top-right);
+\draw (near-bottom-right) -- (far-bottom-right);
+\draw (near-bottom-left) -- (far-bottom-left);
+\begin{scope}[dashed]
+\draw (near-top-left) -- (camera);
+\draw (near-top-right) -- (camera);
+\draw (near-bottom-right) -- (camera);
+\draw (near-bottom-left) -- (camera);
+\draw (camera) -- (near-middle) -- (far-middle);
+\end{scope} 
+\draw[-latex] (0,0,0) -- (1,0,0) node[pos=1.25,fill=white] {$z$};
+\draw[-latex] (0,0,0) -- (0,-1,0) node[pos=1.4,fill=white] {$x$};
+\draw[-latex] (0,0,0) -- (0,0,1) node[pos=1.25] {$y$};
+\node[above left]  at (near-top-left)     {\emph{near-top-left}};
+\node[below right] at (near-top-right)    {\emph{near-top-right}};
+\node[above right] at (near-bottom-right) {\emph{near-bottom-right}};
+\node[below left]  at (near-bottom-left)  {\emph{near-bottom-left}};
+\node[above left]  at (far-top-left)      {\emph{far-top-left}};
+\node[below right,align=left] at (far-top-right)     {\emph{far-}\\\emph{top-}\\\emph{right}};
+\node[above right,align=left] at (far-bottom-right)  {\emph{far-}\\\emph{bottom-}\\\emph{right}};
+\node[below left]  at (far-bottom-left)   {\emph{far-bottom-left}};
+\node[below right,align=left,fill=gray!5] at (near-middle) {\emph{near-}\\\emph{middle}};
+\node[below right,align=left,fill=gray!5] at (far-middle)  {\emph{far-}\\\emph{middle}};
+\node[above left] at (camera)  {camera};
+\node at (near-top-left)     {$\bullet$};
+\node at (near-top-right)    {$\bullet$};
+\node at (near-bottom-right) {$\bullet$};
+\node at (near-bottom-left)  {$\bullet$};
+\node at (far-top-left)      {$\bullet$};
+\node at (far-top-right)     {$\bullet$};
+\node at (far-bottom-right)  {$\bullet$};
+\node at (far-bottom-left)   {$\bullet$};
+\node at (camera) {$\bullet$};
+\node at (near-middle) {$\bullet$};
+\node at (far-middle)  {$\bullet$};
+\end{tikzpicture}
+\caption{The view frustum with a left-handed coordinate system. The $z$-axis to opposite direction would give us a right-handed coordinate system. Image is projected to \emph{near} plane.}
+\label{view-frustum}
+\end{center}
+\end{figure}
 
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[3d view={-30}{10}]
+\coordinate (origo) at (0,0,0);
+\coordinate (near-middle) at (-2,0,0);
+\coordinate (far-middle) at (2,0,0);
+\coordinate (near-top-left) at (-2,2,2);
+\coordinate (near-top-right) at (-2,-2,2);
+\coordinate (near-bottom-right) at (-2,-2,-2);
+\coordinate (near-bottom-left) at (-2,2,-2);
+\coordinate (far-top-left) at (2,2,2);
+\coordinate (far-top-right) at (2,-2,2);
+\coordinate (far-bottom-right) at (2,-2,-2);
+\coordinate (far-bottom-left) at (2,2,-2);
+\fill[gray!5]  (near-top-left) -- (near-top-right) -- (near-bottom-right) -- (near-bottom-left) --cycle;
+\fill[gray!5]  (near-top-left) -- (near-top-right) -- (far-top-right) -- (far-top-left) --cycle;
+\fill[gray!5]  (near-bottom-right) -- (near-top-right) -- (far-top-right) -- (far-bottom-right) --cycle;
+\draw (far-top-left) -- (far-top-right) -- (far-bottom-right) -- (far-bottom-left) --cycle;
+\draw (near-top-left) -- (near-top-right) -- (near-bottom-right) -- (near-bottom-left) --cycle;
+\draw (near-top-left) -- (far-top-left);
+\draw (near-top-right) -- (far-top-right);
+\draw (near-bottom-right) -- (far-bottom-right);
+\draw (near-bottom-left) -- (far-bottom-left);
+\draw[-latex] (0,0,0) -- (1,0,0) node[pos=1.25] {$z$};
+\draw[-latex] (0,0,0) -- (0,-1,0) node[pos=1.3] {$x$};
+\draw[-latex] (0,0,0) -- (0,0,1) node[pos=1.25] {$y$};
+\node[above left]  at (near-top-left)            {\emph{near-top-left}};
+\node[below left] at (near-top-right) {\emph{near-top-right}};
+\node[below left] at (near-bottom-right)         {\emph{near-bottom-right}};
+\node[above left]  at (near-bottom-left)         {\emph{near-bottom-left}};
+\node[above right]  at (far-top-left)            {\emph{far-top-left}};
+\node[above right] at (far-top-right)            {\emph{far-top-right}};
+\node[below right] at (far-bottom-right)         {\emph{far-bottom-right}};
+\node[above right]  at (far-bottom-left)         {\emph{far-bottom-left}};
+\node at (near-top-left)     {$\bullet$};
+\node at (near-top-right)    {$\bullet$};
+\node at (near-bottom-right) {$\bullet$};
+\node at (near-bottom-left)  {$\bullet$};
+\node at (far-top-left)      {$\bullet$};
+\node at (far-top-right)     {$\bullet$};
+\node at (far-bottom-right)  {$\bullet$};
+\node at (far-bottom-left)   {$\bullet$};
+\end{tikzpicture}
+\caption{Normalized device coordinates (NDC).}
+\label{ndc}
+\end{center}
+\end{figure}
 
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+\coordinate (camera) at (0,0);
+\coordinate (near-middle) at (4.5,0);
+\coordinate (near-vert) at (4.5,-0.25);
+\coordinate (near-top) at (4.5,1.5);
+\coordinate (point-p) at (6,1);
+\coordinate (p-horiz) at (6.25,1);
+\coordinate (p-z-horiz) at (6.25,0);
+\coordinate (point-p-z) at (6,0);
+\coordinate (p-vert) at (6,-0.25);
+\coordinate (p-prime) at (4.5,0.75);
+\coordinate (far-middle) at (9,0);
+\coordinate (far-vert) at (9,-0.25);
+\coordinate (far-top) at (9,3);
+\fill[gray!5] (near-top) -- (near-vert) -- (far-vert) -- (far-top) -- cycle;
+
+\begin{scope}[dashed]
+\draw (point-p) -- (camera);
+\draw (point-p) -- (point-p-z) node [midway, right] {$y$};
+\end{scope} 
+
+\begin{scope}[densely dotted]
+\draw (point-p-z) -- (p-vert);
+\draw (near-middle) -- (near-vert);
+\draw (far-middle) -- (far-vert);
+\draw (point-p) -- (p-horiz);
+\draw (point-p-z) -- (far-middle);
+\draw (camera) -- (far-top);
+\end{scope} 
+
+\draw (1.1,0) -- (point-p-z); 
+\draw (near-top) -- (p-prime);
+\draw (p-prime) -- (near-middle) node [midway, right] {$y'$};
+\draw (far-top) -- (far-middle); 
+\node at (camera) {$\bullet$};
+\node at (near-middle) {$\bullet$};
+\node at (near-top)  {$\bullet$};
+\node at (far-middle)  {$\bullet$};
+\node at (far-top)  {$\bullet$};
+\node at (point-p)  {$\bullet$};
+\node at (point-p-z)  {$\bullet$};
+\node at (p-prime)  {$\bullet$};
+\draw[-latex] (0,0) -- (1,0) node[below left] {$z$};
+\draw[-latex] (0,0) -- (0,1) node[below right] {$y$};
+\node[below left] at (camera)  {camera $\mathbf o$};
+\node[below,align=center] at (near-vert) {$\mathbf n$\\\emph{near}};
+\node[below,align=center] at (far-vert)  {$\mathbf f$\\\emph{far}};
+\node[above] at (near-top)  {\emph{near-top}};
+\node[above] at (far-top)  {\emph{far-top}};
+\node[above left] at (point-p)  {$\mathbf p$};
+\node[above left] at (p-prime)  {$\mathbf p'$};
+\node[below] at (p-vert)  {$\mathbf z$};
+\end{tikzpicture}
+\caption{Projection  $\mathbf p'$ of point $\mathbf p$ to \emph{near} plane (side view).}
+\label{side-view}
+\end{center}
+\end{figure}
+
+Here the triangles $\Delta \mathbf o \mathbf z \mathbf p$ and $\Delta \mathbf o \mathbf n \mathbf p'$ are similar.
+Therefore $$\dfrac{|\mathbf n \mathbf p'|}{|\mathbf z \mathbf p|} = \dfrac{|\mathbf o \mathbf n|}{|\mathbf o \mathbf z|} \quad \Rightarrow \quad  \dfrac{y'}{y} = \dfrac{n}{z}$$
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+\coordinate (camera) at (0,0);
+\coordinate (near-middle) at (4.5,0);
+\coordinate (near-vert) at (4.5,0.25);
+\coordinate (near-right) at (4.5,-2);
+\coordinate (point-p) at (6,-1.5);
+\coordinate (p-horiz) at (6.25,-1.5);
+\coordinate (p-z-horiz) at (6.25,0);
+\coordinate (point-p-z) at (6,0);
+\coordinate (p-vert) at (6,0.25);
+\coordinate (p-prime) at (4.5,-1.125);
+\coordinate (far-middle) at (9,0);
+\coordinate (far-vert) at (9,0.25);
+\coordinate (far-right) at (9,-4);
+\fill[gray!5] (near-right) -- (near-vert) -- (far-vert) -- (far-right) -- cycle;
+
+\begin{scope}[dashed]
+\draw (point-p) -- (camera);
+\draw (point-p) -- (point-p-z) node [midway, right] {$x$};
+\end{scope} 
+
+\begin{scope}[densely dotted]
+\draw (point-p-z) -- (p-vert);
+\draw (near-middle) -- (near-vert);
+\draw (far-middle) -- (far-vert);
+\draw (point-p) -- (p-horiz);
+\draw (point-p-z) -- (far-middle);
+\draw (camera) -- (far-right);
+\end{scope} 
+
+\draw (1.1,0) -- (point-p-z); 
+\draw (near-right) -- (p-prime);
+\draw (p-prime) -- (near-middle) node [midway, right] {$x'$};
+\draw (far-right) -- (far-middle); 
+\node at (camera) {$\bullet$};
+\node at (near-middle) {$\bullet$};
+\node at (near-right)  {$\bullet$};
+\node at (far-middle)  {$\bullet$};
+\node at (far-right)  {$\bullet$};
+\node at (point-p)  {$\bullet$};
+\node at (point-p-z)  {$\bullet$};
+\node at (p-prime)  {$\bullet$};
+\draw[-latex] (0,0) -- (1,0) node[above left] {$z$};
+\draw[-latex] (0,0) -- (0,-1) node[above right] {$x$};
+\node[above left] at (camera)  {camera $\mathbf o$};
+\node[above,align=center] at (near-vert) {\emph{near}\\$\mathbf n$};
+\node[above,align=center] at (far-vert)  {\emph{far}\\$\mathbf f$};
+\node[below] at (near-right)  {\emph{near-right}};
+\node[below] at (far-right)  {\emph{far-right}};
+\node[below left] at (point-p)  {$\mathbf p$};
+\node[below left] at (p-prime)  {$\mathbf p'$};
+\node[above] at (p-vert)  {$\mathbf z$};
+\end{tikzpicture}
+\caption{Projection $\mathbf p'$ of point $\mathbf p$ to \emph{near} plane (top view).}
+\label{top-view}
+\end{center}
+\end{figure}
+
+Here the triangles $\Delta \mathbf o \mathbf z \mathbf p$ and $\Delta \mathbf o \mathbf n \mathbf p'$ are similar.
+Therefore $$\dfrac{|\mathbf n \mathbf p'|}{|\mathbf z \mathbf p|} = \dfrac{|\mathbf o \mathbf n|}{|\mathbf o \mathbf z|} \quad \Rightarrow \quad \dfrac{x'}{x} = \dfrac{n}{z}$$
 
